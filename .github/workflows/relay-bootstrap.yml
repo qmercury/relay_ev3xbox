@@ -1,0 +1,41 @@
+name: Relay one-click bootstrap checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  launcher:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Syntax check
+        run: python -m py_compile tools/start_relay.py desktop/relay_gui.py
+      - name: Windows launcher first-time install
+        if: runner.os == 'Windows'
+        shell: cmd
+        run: Start-Relay.cmd --setup-only
+      - name: macOS launcher first-time install
+        if: runner.os == 'macOS'
+        shell: bash
+        run: bash ./Start-Relay.command --setup-only
+      - name: Windows second launch without pip Internet
+        if: runner.os == 'Windows'
+        shell: cmd
+        env:
+          PIP_NO_INDEX: "1"
+        run: Start-Relay.cmd --setup-only
+      - name: macOS second launch without pip Internet
+        if: runner.os == 'macOS'
+        shell: bash
+        env:
+          PIP_NO_INDEX: "1"
+        run: bash ./Start-Relay.command --setup-only
