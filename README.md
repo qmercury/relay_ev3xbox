@@ -2,13 +2,42 @@
 
 Xbox 컨트롤러 여러 개를 노트북에 Bluetooth로 연결하고, 각 컨트롤러의 입력을 Wi-Fi/UDP를 통해 **서로 다른 EV3**로 전달하는 교사용 프로그램입니다.
 
-## 실행
+## 설치 및 실행 — 더블클릭으로 자동 준비
 
-- 노트북에 Python 3과 `pygame==2.6.1`을 설치합니다.
-- `python -m pip install -r requirements.txt`
-- `python desktop/relay_gui.py`
+Relay를 내려받은 노트북에 **Python 3.9~3.13**만 설치되어 있으면 아래 실행 파일이 자동으로 가상환경과 패키지를 준비합니다. **Python 3.12 권장**입니다.
 
-화면의 중계 카드를 통해 선수 이름, EV3 Robot ID, Xbox를 배정한 뒤 중계를 시작합니다. EV3 IP는 저장하지 않으며 Robot ID로 자동 검색합니다. 연결이 끊기면 해당 로봇 중계만 정지하고 복구 후 **수동으로 중계를 시작**해야 합니다.
+- **Windows 10/11:** 프로젝트 폴더의 `Start-Relay.cmd`를 더블클릭합니다.
+- **macOS:** 프로젝트 폴더의 `Start-Relay.command`를 엽니다. macOS에서 실행 권한이 없다고 나오면 최초 한 번 터미널에서 `chmod +x Start-Relay.command`를 실행하거나 `bash Start-Relay.command`로 시작할 수 있습니다.
+
+처음 실행할 때는 자동으로 `.venv/`를 만들고 `requirements.txt`의 `pygame==2.6.1`을 설치한 다음 Relay GUI를 엽니다. **최초 설치에는 인터넷 연결이 필요**하지만, 설치가 끝난 뒤에는 같은 노트북에서 **인터넷 없이도 Relay를 실행할 수 있습니다.** 두 번째 실행부터는 가상환경과 패키지가 이미 준비된 경우 다운로드 없이 바로 시작합니다.
+
+Python 자체가 없다면 실행 파일이 설치 안내를 표시합니다. [Python 3.12 다운로드](https://www.python.org/downloads/). Windows에서 설치 시 `Add python.exe to PATH` 옵션을 선택하면 편리합니다. 현재 방식은 Python까지 포함한 독립 실행형 .exe 설치 파일이 아니며, 이를 원하면 Windows PyInstaller 빌드를 별도로 제작해야 합니다.
+
+### 어떤 파일이 생성되나요?
+
+```text
+relay_ev3xbox/
+  Start-Relay.cmd          Windows 더블클릭
+  Start-Relay.command      Mac 실행
+  requirements.txt         pygame 버전
+  tools/start_relay.py     자동 설치 및 실행 담당
+  .venv/                   첫 실행 때 생성 (Git 제외)
+  desktop/relay_gui.py     기존 Relay GUI
+```
+
+게임패드와 EV3의 선수 배정은 Relay 창에서 기존과 동일하게 설정합니다. 프로필은 사용자 설정 폴더에 유지됩니다. 프로그램 실행 중 Wi-Fi와 Xbox 연결이 끊기면 수동으로 중계를 재개해야 합니다. **Windows에서 Xbox 3개 동시 버튼/축 매핑은 아직 실기 검증 전**입니다.
+
+### 오프라인 사전 점검
+
+대회장으로 출발하기 전, **인터넷 연결 상태에서 처음 한 번** 설치를 완료하세요. GUI를 열지 않고 설치만 점검할 수도 있습니다.
+
+```text
+Windows: Start-Relay.cmd --setup-only
+macOS:   bash ./Start-Relay.command --setup-only
+```
+
+`[Relay] SETUP=OK`를 확인한 뒤 인터넷을 끄고 다시 실행하여 GUI가 정상적으로 열리는지 시험하세요. 첫 설치 전에 인터넷을 끄면 pygame 패키지를 다운로드할 수 없습니다.
+
 
 ## EV3 수신 서비스 (교사/관리자)
 
