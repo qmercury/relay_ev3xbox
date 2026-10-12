@@ -1,5 +1,8 @@
 # Xbox Service 자동 시작
 
+> **역할 구분 (2026-10-12):** EV3에서 상주하는 `xbox_service.py`는 이 교사용 `relay_ev3xbox` 저장소가 관리하며, 학생 `main.py`는 별도 [student_ev3xbox](https://github.com/qmercury/student_ev3xbox) 저장소 최상위에 있습니다. 본문에 남아 있는 `student/main.py` 표시는 **과거 통합 저장소의 파일 경로**입니다. EV3로 업로드된 학생 프로그램은 `/home/robot/ev3-student/main.py`를 사용합니다.
+
+
 학생 프로그램과 Xbox 입력 서비스를 분리하기 위해 EV3에서는
 `xbox_service.py`가 학생 `main.py`와 별개의 systemd 서비스로 실행됩니다.
 
