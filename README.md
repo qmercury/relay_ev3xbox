@@ -2,6 +2,52 @@
 
 Xbox 컨트롤러 여러 개를 노트북에 Bluetooth로 연결하고, 각 컨트롤러의 입력을 Wi-Fi/UDP를 통해 **서로 다른 EV3**로 전달하는 교사용 프로그램입니다.
 
+## 처음 다운로드: 터미널에서 GitHub 저장소 복제하기
+
+`git clone`은 교사용 Relay 프로젝트 파일을 노트북으로 복사하는 명령입니다. **처음 한 번만** 실행합니다. [Git](https://git-scm.com/downloads)과 **Python 3.9~3.13(권장 3.12)**을 미리 설치하고, 첫 설치 시에는 인터넷에 연결하세요. [Python 설치](https://www.python.org/downloads/). `pygame`과 가상환경은 실행기가 자동으로 준비합니다.
+
+### Windows PowerShell — 아래 블록 전체 복사·붙여넣기
+
+```powershell
+New-Item -ItemType Directory -Force -Path "$HOME\Documents\EV3_Projects" | Out-Null
+Set-Location "$HOME\Documents\EV3_Projects"
+git clone https://github.com/qmercury/relay_ev3xbox.git
+Set-Location .\relay_ev3xbox
+.\Start-Relay.cmd
+```
+
+- `New-Item`: 문서 폴더에 프로젝트 저장 장소를 만듭니다.
+- `Set-Location`: 작업할 폴더로 이동합니다.
+- `git clone`: Relay 저장소를 다운로드합니다.
+- `.\Start-Relay.cmd`: 가상환경과 pygame을 자동 설치(첫 실행)하고 Relay 창을 엽니다.
+
+### Mac 터미널(zsh) — 아래 블록 전체 복사·붙여넣기
+
+```bash
+mkdir -p ~/Documents/EV3_Projects
+cd ~/Documents/EV3_Projects
+git clone https://github.com/qmercury/relay_ev3xbox.git
+cd relay_ev3xbox
+./Start-Relay.command
+```
+
+- `mkdir -p`: 문서 폴더 안에 프로젝트 저장 장소를 만듭니다.
+- `cd`: 작업할 폴더로 이동합니다.
+- `git clone`: Relay 저장소를 다운로드합니다.
+- `./Start-Relay.command`: 가상환경·pygame 자동 설치 후 Relay 창을 엽니다.
+
+Mac에서 실행 권한 오류가 나는 환경이라면 `bash ./Start-Relay.command`로 실행할 수 있습니다. 현재 저장소의 파일은 실행 가능 권한으로 관리합니다.
+
+### 이미 복제했다면: 최신 코드 업데이트
+
+기존 `relay_ev3xbox` 폴더에서 아래 명령을 사용하세요. **`git clone`을 다시 실행하지 않습니다.** 실행 중인 Relay 창을 먼저 닫고 업데이트하는 것이 안전합니다.
+
+```bash
+git pull --ff-only
+```
+
+업데이트 후 Windows는 `.\Start-Relay.cmd`, Mac은 `./Start-Relay.command`를 실행합니다. **첫 설치 이후** pygame 설치가 준비되어 있으면 인터넷 없이도 Relay를 시작할 수 있습니다.
+
 ## 설치 및 실행 — 더블클릭으로 자동 준비
 
 Relay를 내려받은 노트북에 **Python 3.9~3.13**만 설치되어 있으면 아래 실행 파일이 자동으로 가상환경과 패키지를 준비합니다. **Python 3.12 권장**입니다.
