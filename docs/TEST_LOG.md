@@ -567,3 +567,22 @@ Attempted to create a standalone Wi-Fi network using macOS 26.6.2 Internet Shari
 Result: Standalone macOS Internet Sharing Wi-Fi AP **NOT FUNCTIONAL in this tested setup**. The missing Ethernet link is a possible cause, not proven. No EV3 network reconfiguration was attempted. Offline multi-EV3 network remains UNTESTED.
 
 Decision: stop repeatedly toggling macOS Internet Sharing in this configuration. Restore the original Wi-Fi network and continue Relay/software testing there. For venue-independent deployment, validate either a proven host AP implementation or a standalone local Wi-Fi AP/router with no Internet uplink; test Wi-Fi regulations before competition.
+
+
+## 2026-10-12 — 교사용 Relay 원클릭 실행기 추가 및 확인
+
+기능:
+- `Start-Relay.cmd`(Windows), `Start-Relay.command`(macOS) 더블클릭 시 Python 3.9–3.13 선택, `.venv` 준비, `pygame==2.6.1` 설치, `desktop/relay_gui.py` 실행
+- `.venv`와 pygame이 이미 준비되면 설치를 건너뛰므로 대회장 인터넷이 없어도 재실행 가능. 최초 설치는 Python 및 인터넷이 필요
+- 기존 EV3 `xbox_service.py`, 학생 알고리즘, 중계 프로토콜은 변경하지 않음
+
+검증:
+- GitHub Actions macOS 및 Windows에서 첫 패키지 설치와 두 번째 `PIP_NO_INDEX=1` 재실행 테스트 PASS
+- 사용자의 Mac mini에서 `./Start-Relay.command` 실행 후 Relay GUI 열림 확인 PASS
+
+아직 검증하지 않은 사항:
+- 실제 Windows 노트북에서 Relay 창과 Xbox 3개 인식/버튼 매핑, EV3 3대 동시 조종
+- 인터넷이 없는 대회용 AP/USB SoftAP 방식에서 EV3 3대 연결 및 안정성
+- 공유기 제품은 미결정 (공용 AP와 팀별 AP 모두 후보)
+
+진행 상태: [교사용 운영 계획](relay/alliance-relay.md) 및 [세 저장소 개발 현황](https://github.com/qmercury/ev3XboxConnect/blob/main/docs/NEXT_STEPS.md).
