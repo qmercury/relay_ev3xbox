@@ -99,6 +99,14 @@ python tools/ev3_service.py set-id EV3-01
 
 `tools/ev3_service.py`는 공통 SSH/Robot ID 검색 코드를 `tools/ev3_deploy.py`에서 가져옵니다. 이 지원 모듈은 호환성 유지를 위해 포함했습니다. **학생의 알고리즘 코드는 이 저장소에 포함되지 않습니다.**
 
+## 문서와 대회 준비 상태 (2026-10-12)
+
+- **[얼라이언스 Relay 운영](docs/relay/alliance-relay.md):** 팀 3대 중계, 인터넷 없는 Wi-Fi, 공용 AP vs 팀별 AP 비교, 남은 검증 항목
+- **[테스트 기록](docs/TEST_LOG.md):** macOS/EV3 실기 시험 내역. 기존 시험 결과는 역사적 기록으로 보존
+- **[전체 프로젝트 진행 상황](https://github.com/qmercury/ev3XboxConnect/blob/main/docs/NEXT_STEPS.md):** 원본 실험 저장소와 학생·교사 운영 저장소의 역할 및 다음 테스트
+
+**현재 공유기 모델은 확정되지 않았습니다.** ipTIME A3000UA USB 무선랜 카드의 SoftAP, 별도 휴대용 AP, 공용 공유기 등을 검토 중입니다. GitHub Actions에서 Windows·Mac 설치 자동화가 성공했더라도, **Windows 실물 노트북에서 Xbox 3개·EV3 3대 중계**가 검증됐다는 의미는 아닙니다.
+
 ## 운영 조건
 
 - 인터넷 없이 로컬 2.4GHz Wi-Fi로 노트북과 EV3 간 통신
