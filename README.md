@@ -1,5 +1,7 @@
 # EV3 Xbox · 교사용 Relay
 
+**문서 목록:** [docs/README.md](docs/README.md) · **전체 개발 현황:** [원본 로드맵](https://github.com/qmercury/ev3XboxConnect/blob/main/docs/NEXT_STEPS.md)
+
 Xbox 컨트롤러 여러 개를 노트북에 Bluetooth로 연결하고, 각 컨트롤러의 입력을 Wi-Fi/UDP를 통해 **서로 다른 EV3**로 전달하는 교사용 프로그램입니다.
 
 ## 처음 다운로드: 터미널에서 GitHub 저장소 복제하기
