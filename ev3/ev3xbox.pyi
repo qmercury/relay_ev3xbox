@@ -1,0 +1,26 @@
+from typing import Optional, Set, Tuple
+
+class XboxButton:
+    A: str
+    B: str
+    X: str
+    Y: str
+    LB: str
+    RB: str
+    UP: str
+    DOWN: str
+    LEFT: str
+    RIGHT: str
+
+class _Buttons:
+    def pressed(self) -> Set[str]: ...
+
+class XboxController:
+    buttons: _Buttons
+    def __init__(self) -> None: ...
+    def joystick_left(self) -> Tuple[int, int]: ...
+    def joystick_right(self) -> Tuple[int, int]: ...
+    def triggers(self) -> Tuple[int, int]: ...
+    def connected(self) -> bool: ...
+    def close(self) -> None: ...
+    def wait_until_connected(self, timeout: Optional[float] = ..., poll: float = ...) -> bool: ...

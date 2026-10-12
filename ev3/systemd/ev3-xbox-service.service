@@ -1,0 +1,16 @@
+[Unit]
+Description=EV3 Xbox controller relay service
+After=network.target
+
+[Service]
+Type=simple
+User=robot
+WorkingDirectory=/home/robot/ev3-xbox
+ExecStart=/usr/bin/python3 -u /home/robot/ev3-xbox/xbox_service.py
+Restart=always
+RestartSec=1
+KillSignal=SIGINT
+TimeoutStopSec=2
+
+[Install]
+WantedBy=multi-user.target

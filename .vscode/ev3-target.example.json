@@ -1,0 +1,11 @@
+{
+  "host": "192.168.77.2",
+  "user": "robot",
+  "port": 22,
+  "robot_id": "EV3-01",
+  "remote_dir": "/home/robot/ev3-student",
+  "main_file": "main.py",
+  "python": "python3",
+  "connect_timeout": 5,
+  "sync_library": true
+}
