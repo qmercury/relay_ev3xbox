@@ -19,7 +19,7 @@ DEFAULT_EV3_PORT = 5005
 DISCOVERY_QUERY_INTERVAL = 1.0
 DISCOVERY_ACTIVE_SECONDS = 3.0
 
-CONTROL_HZ = 30
+CONTROL_HZ = 60
 HEARTBEAT_INTERVAL = 0.5
 EV3_TIMEOUT = 1.5
 DEADZONE = 0.12
@@ -175,7 +175,6 @@ class RelayApp:
         self.last_controller_scan = 0.0
         self.last_discovery_query = 0.0
         self.last_heartbeat = 0.0
-        self.last_control = 0.0
 
         self.button_rects = {}
         self.scroll_offset = 0
@@ -1541,9 +1540,9 @@ class RelayApp:
 
             self.receive_packets()
 
-            if now - self.last_control >= 1.0 / CONTROL_HZ:
-                self.last_control = now
-                self.send_controls()
+            # Send one control packet per frame. A second 60 Hz elapsed-time
+            # gate in a 60 FPS loop can accidentally skip alternating frames.
+            self.send_controls()
 
             for relay in self.relays:
                 if relay.relay_enabled and not self.ev3_connected(relay):
@@ -1553,7 +1552,7 @@ class RelayApp:
                     )
 
             self.draw()
-            self.clock.tick(60)
+            self.clock.tick(CONTROL_HZ)
 
         self.stop_all()
         self.sock.close()
